@@ -38,7 +38,46 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.Logging">
+      <HintPath>..\packages\Castle.LoggingFacility.3.3.0\lib\net45\Castle.Facilities.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.NLogIntegration">
+      <HintPath>..\packages\Castle.Core-NLog.3.3.0\lib\net45\Castle.Services.Logging.NLogIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.NLog">
+      <HintPath>..\packages\Common.Logging.NLog.Net4.2.1.2\lib\net40\Common.Logging.NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Highway.Data">
+      <HintPath>..\packages\Highway.Data.5.0.6.0\lib\net45\Highway.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Highway.Data.EntityFramework">
+      <HintPath>..\packages\Highway.Data.EntityFramework.5.0.6.0\lib\net45\Highway.Data.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Highway.Pavement">
+      <HintPath>..\packages\Highway.Pavement.0.3.0.0\lib\net40\Highway.Pavement.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -56,6 +95,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -97,8 +139,44 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Architecture\Activators\AnnouncementsActivator.cs" />
+    <Compile Include="App_Architecture\Activators\ApiConfigurationActivator.cs" />
+    <Compile Include="App_Architecture\Activators\ControllerFactoryActivator.cs" />
+    <Compile Include="App_Architecture\Activators\DatabaseInitializerActivator.cs" />
+    <Compile Include="App_Architecture\Activators\FilterProviderActivator.cs" />
+    <Compile Include="App_Architecture\Activators\WindsorActivator.cs" />
+    <Compile Include="App_Architecture\Installers\CommonLoggingInstaller.cs" />
+    <Compile Include="App_Architecture\Installers\ControllersInstaller.cs" />
+    <Compile Include="App_Architecture\Installers\DefaultConventionInstaller.cs" />
+    <Compile Include="App_Architecture\Installers\EntityFrameworkInstaller.cs" />
+    <Compile Include="App_Architecture\Installers\HighwayDataInstaller.cs" />
+    <Compile Include="App_Architecture\Installers\LoggingInstaller.cs" />
+    <Compile Include="App_Architecture\IoC.cs" />
+    <Compile Include="App_Architecture\Services\Core\CollectionAdapter.cs" />
+    <Compile Include="App_Architecture\Services\Core\DictionaryEnumerator.cs" />
+    <Compile Include="App_Architecture\Services\Core\SessionDictionary.cs" />
+    <Compile Include="App_Architecture\Services\Core\WindsorControllerFactory.cs" />
+    <Compile Include="App_Architecture\Services\Core\WindsorFilterProvider.cs" />
+    <Compile Include="App_Architecture\Services\Core\WindsorHttpControllerActivator.cs" />
+    <Compile Include="App_Architecture\Services\Data\Entities\Widget.cs" />
+    <Compile Include="App_Architecture\Services\Data\HighwayContextConfiguration.cs" />
+    <Compile Include="App_Architecture\Services\Data\HighwayMappingConfiguration.cs" />
+    <Compile Include="App_Architecture\Services\Data\Mappings\WidgetConfiguration.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BaseTypes\BaseApiController.cs" />
+    <Compile Include="BaseTypes\BaseController.cs" />
+    <Compile Include="BaseTypes\BaseRestApiController.cs" />
+    <Compile Include="Configs\IConnectionStringConfig.cs" />
+    <Compile Include="Configs\IDatabaseInitializerConfig.cs" />
+    <Compile Include="Configs\InitializerTypes.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Domain.cs" />
+    <Compile Include="Entities\ExampleEntity.cs" />
+    <Compile Include="Entities\Mappings\BaseMapping.cs" />
+    <Compile Include="Entities\Mappings\ExampleEntityMapping.cs" />
+    <Compile Include="Filters\ExceptionLoggingInjectableFilter.cs" />
+    <Compile Include="Filters\IInjectableFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -107,6 +185,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="NLog.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -115,6 +194,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Architecture\Services\Data\Commands\" />
+    <Folder Include="App_Architecture\Services\Data\Migrations\" />
+    <Folder Include="App_Architecture\Services\Data\Queries\" />
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
