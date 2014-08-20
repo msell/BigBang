@@ -10,7 +10,7 @@ namespace BigBang.Api.App_Architecture.Services.Data
     {
         public DatabaseInitializerConfiguration()
         {
-            Initializer = InitializerTypes.DropCreateDatabaseAlways;
+            Initializer = InitializerTypes.CreateDatabaseIfNotExists;
         }
         public InitializerTypes Initializer { get; set; }
     }

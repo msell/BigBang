@@ -1,6 +1,7 @@
 // [[Highway.Onramp.MVC]]
 using System;
 using System.Linq;
+using BigBang.Api.Configs;
 using Castle.Windsor;
 using Castle.MicroKernel;
 using Castle.Windsor.Installer;
@@ -13,9 +14,10 @@ using BigBang.Api.App_Architecture.Activators;
 using BigBang.Api.App_Architecture.Services.Core;
 using System.Web;
 using System.Collections;
+using Highway.Data;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(
-    typeof(WindsorActivator), 
+    typeof(WindsorActivator),
     "Startup")]
 namespace BigBang.Api.App_Architecture.Activators
 {
@@ -63,6 +65,13 @@ namespace BigBang.Api.App_Architecture.Activators
                             (k, m, c) => daf.GetAdapter(m.Implementation, new SessionDictionary(HttpContext.Current.Session) as IDictionary)
                             )
                     ).LifestylePerWebRequest());
+
+            IoC.Container.Register(
+                Component.For<IDataContext>().ImplementedBy<DataContext>()
+                    .DependsOn(Dependency.OnConfigValue("connectionString",
+                        IoC.Container.Resolve<IConnectionStringConfig>().ConnectionString)),
+                Component.For<IRepository>().ImplementedBy<Repository>()
+                        );
 
 
             // Search for an use all installers in this application.
