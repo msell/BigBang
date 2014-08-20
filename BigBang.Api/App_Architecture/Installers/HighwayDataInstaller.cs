@@ -1,6 +1,7 @@
 // [[Highway.Onramp.MVC.Data]]
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -17,7 +18,13 @@ namespace BigBang.Api.App_Architecture.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<IDomainRepositoryFactory>().ImplementedBy<DomainRepositoryFactory>());
+                Component.For<IDomainRepositoryFactory>().ImplementedBy<DomainRepositoryFactory>(),
+                // TODO: fix hard coded connstring
+                Component.For<IDataContext>().ImplementedBy<DataContext>()               
+                .DependsOn(Dependency.OnConfigValue("connectionString","Server=(localdb)\v11.0;Database=BigBangDb;Integrated Security=true;")),
+                //This is Highway.Data's Repository
+                Component.For<IRepository>().ImplementedBy<Repository>()
+                );
         }
     }
 }

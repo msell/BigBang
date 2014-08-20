@@ -158,10 +158,12 @@
     <Compile Include="App_Architecture\Services\Core\WindsorControllerFactory.cs" />
     <Compile Include="App_Architecture\Services\Core\WindsorFilterProvider.cs" />
     <Compile Include="App_Architecture\Services\Core\WindsorHttpControllerActivator.cs" />
+    <Compile Include="App_Architecture\Services\Data\DatabaseInitializerConfiguration.cs" />
     <Compile Include="App_Architecture\Services\Data\Entities\Widget.cs" />
     <Compile Include="App_Architecture\Services\Data\HighwayContextConfiguration.cs" />
     <Compile Include="App_Architecture\Services\Data\HighwayMappingConfiguration.cs" />
     <Compile Include="App_Architecture\Services\Data\Mappings\WidgetConfiguration.cs" />
+    <Compile Include="App_Architecture\Services\Data\Queries\AllWidgets.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BaseTypes\BaseApiController.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Configs\IConnectionStringConfig.cs" />
     <Compile Include="Configs\IDatabaseInitializerConfig.cs" />
     <Compile Include="Configs\InitializerTypes.cs" />
+    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Domain.cs" />
     <Compile Include="Entities\ExampleEntity.cs" />
@@ -196,9 +199,7 @@
   <ItemGroup>
     <Folder Include="App_Architecture\Services\Data\Commands\" />
     <Folder Include="App_Architecture\Services\Data\Migrations\" />
-    <Folder Include="App_Architecture\Services\Data\Queries\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>

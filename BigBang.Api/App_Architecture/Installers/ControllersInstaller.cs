@@ -17,7 +17,8 @@ namespace BigBang.Api.App_Architecture.Installers
         {
             container.Register(
                 Classes.FromThisAssembly()
-                    .Where(type => typeof(IController).IsAssignableFrom(type) || typeof(IHttpController).IsAssignableFrom(type))
+                    .Where(type => typeof(IController).IsAssignableFrom(type) || 
+                        typeof(IHttpController).IsAssignableFrom(type))
                     .WithServiceSelf()
                     .LifestyleTransient()
                 );
