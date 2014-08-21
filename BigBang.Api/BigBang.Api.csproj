@@ -38,6 +38,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BrockAllen.MembershipReboot">
+      <HintPath>..\packages\BrockAllen.MembershipReboot.7.4.1\lib\net45\BrockAllen.MembershipReboot.dll</HintPath>
+    </Reference>
+    <Reference Include="BrockAllen.MembershipReboot.Ef">
+      <HintPath>..\packages\BrockAllen.MembershipReboot.Ef.7.1.1\lib\net45\BrockAllen.MembershipReboot.Ef.dll</HintPath>
+    </Reference>
+    <Reference Include="BrockAllen.MembershipReboot.WebHost">
+      <HintPath>..\packages\BrockAllen.MembershipReboot.WebHost.7.1.0\lib\net45\BrockAllen.MembershipReboot.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
@@ -56,11 +65,13 @@
     <Reference Include="Common.Logging.NLog">
       <HintPath>..\packages\Common.Logging.NLog.Net4.2.1.2\lib\net40\Common.Logging.NLog.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Highway.Data">
       <HintPath>..\packages\Highway.Data.5.0.6.0\lib\net45\Highway.Data.dll</HintPath>
@@ -78,6 +89,8 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Services" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -151,6 +164,7 @@
     <Compile Include="App_Architecture\Installers\EntityFrameworkInstaller.cs" />
     <Compile Include="App_Architecture\Installers\HighwayDataInstaller.cs" />
     <Compile Include="App_Architecture\Installers\LoggingInstaller.cs" />
+    <Compile Include="App_Architecture\Installers\MembershipRebootInstaller.cs" />
     <Compile Include="App_Architecture\IoC.cs" />
     <Compile Include="App_Architecture\Services\Core\CollectionAdapter.cs" />
     <Compile Include="App_Architecture\Services\Core\DictionaryEnumerator.cs" />
@@ -172,6 +186,7 @@
     <Compile Include="Configs\IConnectionStringConfig.cs" />
     <Compile Include="Configs\IDatabaseInitializerConfig.cs" />
     <Compile Include="Configs\InitializerTypes.cs" />
+    <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Domain.cs" />
@@ -183,6 +198,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,7 +216,6 @@
     <Folder Include="App_Architecture\Services\Data\Commands\" />
     <Folder Include="App_Architecture\Services\Data\Migrations\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
