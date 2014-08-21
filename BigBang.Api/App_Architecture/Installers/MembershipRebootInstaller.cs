@@ -20,11 +20,8 @@ namespace BigBang.Api.App_Architecture.Installers
             container.Register(
                     Component.For<UserAccountService>(),
                     Component.For<AuthenticationService>().ImplementedBy<SamAuthenticationService>(),
-                    Component.For<IUserAccountQuery>().ImplementedBy<DefaultUserAccountRepository>(),
-                    Component.For<IUserAccountRepository>()
-                    .ImplementedBy<DefaultUserAccountRepository>()
-                    .Named("BrockAllenUserAccountRepository")
-                    
+                    Component.For<IUserAccountQuery>().ImplementedBy<DefaultUserAccountRepository>().LifestyleTransient(),
+                   Component.For<IUserAccountRepository>().ImplementedBy<DefaultUserAccountRepository>().LifestyleTransient().Named("UserAccountRepo")
                 );
         }
     }

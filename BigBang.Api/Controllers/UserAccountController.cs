@@ -25,9 +25,16 @@ namespace BigBang.Api.Controllers
         public IHttpActionResult Login([FromBody] LoginInputModel model)
         {
             UserAccount account;
-            if (_userAccountService.AuthenticateWithUsernameOrEmail(model.Username, model.Password, out account))
+            if (_userAccountService.AuthenticateWithUsernameOrEmail(model.UsernameOrEmail, model.Password, out account))
             {
-                _authService.SignIn(account, model.RememberMe);                
+                try
+                {
+                    _authService.SignIn(account, model.RememberMe);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
             else
             {
@@ -43,10 +50,8 @@ namespace BigBang.Api.Controllers
         {
             try
             {
-                var account = _userAccountService.CreateAccount(
-                    model.Username,
-                    model.Password,
-                    model.Email);
+                var account = _userAccountService.CreateAccount(username: model.Username, password: model.Password,
+                    email: model.Email, dateCreated: DateTime.Now);
                 return Ok(account.Username);
             }
             catch (Exception ex)
