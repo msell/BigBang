@@ -21,6 +21,7 @@ namespace BigBang.Api.Controllers
         }
 
         [HttpPost]
+        [Route("api/UserAccount/Login")]
         public IHttpActionResult Login([FromBody] LoginInputModel model)
         {
             UserAccount account;
@@ -34,6 +35,24 @@ namespace BigBang.Api.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/UserAccount/Register")]
+        public IHttpActionResult Register([FromBody] RegisterInputModel model)
+        {
+            try
+            {
+                var account = _userAccountService.CreateAccount(
+                    model.Username,
+                    model.Password,
+                    model.Email);
+                return Ok(account.Username);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
